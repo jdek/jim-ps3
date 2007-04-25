@@ -155,7 +155,7 @@ static int register_device(void)
 		goto out3;
 	}
 
-	printk(KERN_INFO "ps3vram mtd device registered, %lld bytes\n", ddr_size);
+	printk(KERN_INFO "ps3vram mtd device registered, %ld bytes\n", ddr_size);
 
 	return 0;
 
