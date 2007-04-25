@@ -16,7 +16,17 @@
 #include <linux/moduleparam.h>
 #include <linux/slab.h>
 #include <linux/mtd/mtd.h>
+#include <linux/version.h>
 #include <asm/lv1call.h>
+
+#ifndef MTD_ERASEABLE
+#define MTD_ERASEABLE 0
+#endif
+
+#ifndef MTD_VOLATILE
+#define MTD_VOLATILE 0
+#endif
+
 
 struct mtd_info ps3vram_mtd;
 
@@ -135,6 +145,9 @@ static int register_device(void)
 	ps3vram_mtd.owner = THIS_MODULE;
 	ps3vram_mtd.type = MTD_RAM;
 	ps3vram_mtd.erasesize = PAGE_SIZE;
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,18)
+	ps3vram_mtd.writesize = 1;
+#endif
 
 	ret = -EAGAIN;
 	if (add_mtd_device(&ps3vram_mtd)) {
@@ -142,7 +155,7 @@ static int register_device(void)
 		goto out3;
 	}
 
-	printk(KERN_INFO "ps3vram mtd device registered, %ld bytes\n", ddr_size);
+	printk(KERN_INFO "ps3vram mtd device registered, %lld bytes\n", ddr_size);
 
 	return 0;
 
