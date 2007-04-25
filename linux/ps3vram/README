@@ -1,0 +1,45 @@
+PS3vram by Jim Paris <jim@jtan.com>.
+
+Description
+-----------
+This is a Linux kernel module to use the extra PS3 GDDR video RAM as
+a MTD block device.  It requires MTD block device support in the
+kernel (CONFIG_MTD && CONFIG_MTD_BLOCK).  It is not currently very
+fast, but could be useful as swap space or additional storage for
+LiveCD systems.
+
+It has been tested on the 2.6.16-ps3 kernel (20061110) but should work
+on others.
+
+Installation
+------------
+To build, have your kernel source or headers installed properly and
+then run:
+
+  make
+  sudo make install
+
+To use it, load the appropriate modules:
+
+  sudo modprobe mtdblock
+  sudo modprobe ps3vram
+
+This should create a new block device /dev/mtdblock0.
+
+Using it
+--------
+The block device behaves like any other disk.  To use it as swap:
+
+  sudo mkswap /dev/mtdblock0
+  sudo swapon /dev/mtdblock0 -p 10
+
+To create and mount a filesystem:
+ 
+  sudo mkfs.ext3 /dev/mtdblock0
+  sudo mkdir -p /mnt/tmp
+  sudo mount /dev/mtdblock0 /mnt/tmp
+
+Acknowledgements
+----------------
+StrontiumDog and urchin for figuring out how to map and use the RAM.
+See also http://forums.ps2dev.org/viewtopic.php?p=53486
