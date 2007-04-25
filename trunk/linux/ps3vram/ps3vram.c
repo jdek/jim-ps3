@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2007           Jim Paris <jim@jtan.com>
  * 
- * Based on spram.c:
+ * Based on phram.c:
  * Copyright (c) ????		Jochen Schäuble <psionic@psionic.de>
  * Copyright (c) 2003-2004	Jörn Engel <joern@wh.fh-wedel.de>
  *
