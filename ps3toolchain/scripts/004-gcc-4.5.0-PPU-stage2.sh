@@ -16,7 +16,7 @@ cat ../../patches/gcc-4.5.0-PPU.patch | patch -p1 || { exit 1; }
 ## Unpack the libraries.
 tar xfvj ../gmp-5.0.1.tar.bz2 && ln -s gmp-5.0.1 gmp || { exit 1; }
 tar xfvz ../mpc-0.8.2.tar.gz && ln -s mpc-0.8.2 mpc || { exit 1; }
-tar xfvj ../mpfr-2.4.2.tar.bz2 && ln -s mprf-2.4.2 mpfr || { exit 1; }
+tar xfvj ../mpfr-2.4.2.tar.bz2 && ln -s mpfr-2.4.2 mpfr || { exit 1; }
 
 ## Create the build directory.
 mkdir build-ppu-stage2 && cd build-ppu-stage2 || { exit 1; }
